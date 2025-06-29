@@ -28,4 +28,10 @@ jobs:
 
       - name: Pack NuGet package
         run: dotnet pack ./src/KPasswordGenerator.sln --configuration Release -o package
+        
+      - name: Upload NuGet package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NuGetPackage
+          path: package/*.nupkg
 
