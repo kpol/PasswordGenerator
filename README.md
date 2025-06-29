@@ -24,7 +24,7 @@ A lightweight, secure, and flexible password generator library for .NET, built w
 using KPasswordGenerator;
 
 // Define your password policy
-var settings = new PasswordSettings(
+PasswordSettings settings = new(
 [
     new CharSet(2, "ABCDEFGHJKLMNPQRSTUVWXYZ"),    // At least 2 uppercase letters (no I, O)
     new CharSet(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
@@ -32,10 +32,8 @@ var settings = new PasswordSettings(
     new CharSet(2, "!@$?_-")                       // At least 2 symbols
 ]);
 
-// Create the generator
-var generator = new PasswordGenerator(settings);
+PasswordGenerator generator = new(settings);
 
-// Generate a secure password of 16 characters
 string password = generator.Generate(16);
 
 Console.WriteLine(password);  // Example output: kAj79uV@E?m7_8eS
