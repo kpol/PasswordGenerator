@@ -27,7 +27,7 @@ jobs:
         run: dotnet test ./src/KPasswordGenerator.sln --configuration Release --verbosity normal
 
       - name: Pack NuGet package
-        run: dotnet pack ./src/KPasswordGenerator/KPasswordGenerator.csproj --configuration Release -p:PackageVersion=${{ env.PACKAGE_VERSION }} -o package
+        run: dotnet pack ./src/KPasswordGenerator/KPasswordGenerator.csproj --configuration Release -o package
 
       - name: Upload NuGet package as artifact
         uses: actions/upload-artifact@v4
