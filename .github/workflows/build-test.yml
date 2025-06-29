@@ -1,0 +1,36 @@
+name: Build, Test
+
+on:
+  push:
+    branches: [ '**' ]   # all branches, every commit
+  pull_request:
+    branches: [ '**' ]   # also on PRs to any branch
+  workflow_dispatch:     # manual trigger
+
+jobs:
+  build-test-pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build solution
+        run: dotnet build ./src/KPasswordGenerator.sln --configuration Release
+
+      - name: Run tests
+        run: dotnet test ./src/KPasswordGenerator.sln --configuration Release --verbosity normal
+
+      - name: Pack NuGet package
+        run: dotnet pack ./src/KPasswordGenerator/KPasswordGenerator.csproj --configuration Release -o package
+
+      - name: Upload NuGet package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NuGetPackage
+          path: package/*.nupkg
