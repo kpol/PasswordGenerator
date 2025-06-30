@@ -1,6 +1,6 @@
 ﻿namespace KPasswordGenerator;
 
-public static class CharSets
+public static class CharacterPools
 {
     public const string LowerCase = "abcdefghijklmnopqrstuvwxyz";
 

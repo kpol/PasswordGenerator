@@ -15,23 +15,23 @@ public sealed class PasswordGenerator
 
     public string Generate(int passwordLength)
     {
-        ArgumentOutOfRangeException.ThrowIfLessThan(passwordLength, _passwordSettings._minimumPasswordLength);
+        ArgumentOutOfRangeException.ThrowIfLessThan(passwordLength, _passwordSettings.MinimumPasswordLength);
 
-        Span<char> result = passwordLength <= 512 ?
+        Span<char> buffer = passwordLength <= 512 ?
             stackalloc char[passwordLength] :
             new char[passwordLength];
 
         int index = 0;
 
-        foreach (var charSet in _passwordSettings.CharSets)
+        foreach (var requirement in _passwordSettings.CharacterRequirements)
         {
-            RandomNumberGenerator.GetItems(charSet.Chars, result.Slice(index, charSet.Count));
-            index += charSet.Count;
+            RandomNumberGenerator.GetItems(requirement.CharacterPool, buffer.Slice(index, requirement.MinRequired));
+            index += requirement.MinRequired;
         }
 
-        RandomNumberGenerator.GetItems(_passwordSettings._allChars, result[index..]);
-        RandomNumberGenerator.Shuffle(result);
+        RandomNumberGenerator.GetItems(_passwordSettings.AllChars, buffer[index..]);
+        RandomNumberGenerator.Shuffle(buffer);
 
-        return result.ToString();
+        return buffer.ToString();
     }
 }

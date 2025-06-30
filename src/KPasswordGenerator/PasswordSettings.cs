@@ -2,18 +2,18 @@
 
 public sealed class PasswordSettings
 {
-    internal readonly string _allChars;
-    internal readonly int _minimumPasswordLength;
+    internal readonly string AllChars;
+    internal readonly int MinimumPasswordLength;
 
-    public PasswordSettings(ICollection<CharSet> charSets)
+    public PasswordSettings(ICollection<CharacterRequirement> characterRequirements)
     {
-        ArgumentNullException.ThrowIfNull(charSets);
+        ArgumentNullException.ThrowIfNull(characterRequirements);
 
-        _minimumPasswordLength = charSets.Sum(c => c.Count);
-        CharSets = charSets;
-        _allChars = string.Concat(charSets.Select(c => c.Chars));
+        MinimumPasswordLength = characterRequirements.Sum(c => c.MinRequired);
+        CharacterRequirements = characterRequirements;
+        AllChars = string.Concat(characterRequirements.Select(c => c.CharacterPool));
         
     }
 
-    public ICollection<CharSet> CharSets { get; }
+    public ICollection<CharacterRequirement> CharacterRequirements { get; }
 }
