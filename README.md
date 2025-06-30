@@ -26,10 +26,10 @@ using KPasswordGenerator;
 // Define your password policy
 PasswordSettings settings = new(
 [
-    new CharSet(2, "ABCDEFGHJKLMNPQRSTUVWXYZ"),    // At least 2 uppercase letters (no I, O)
-    new CharSet(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
-    new CharSet(4, "23456789"),                    // At least 4 digits (no 0, 1)
-    new CharSet(2, "!@$?_-")                       // At least 2 symbols
+    new CharacterRequirement(minRequired: 2, characterPool: "ABCDEFGHJKLMNPQRSTUVWXYZ"),    // At least 2 uppercase letters (no I, O)
+    new CharacterRequirement(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
+    new CharacterRequirement(4, "23456789"),                    // At least 4 digits (no 0, 1)
+    new CharacterRequirement(2, "!@$?_-")                       // At least 2 symbols
 ]);
 
 PasswordGenerator generator = new(settings);

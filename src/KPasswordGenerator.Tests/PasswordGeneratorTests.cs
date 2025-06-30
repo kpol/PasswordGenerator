@@ -2,9 +2,9 @@
 
 public class PasswordGeneratorTests
 {
-    private static readonly CharSet _lowerCase = new(2, "abcdef");
-    private static readonly CharSet _upperCase = new(2, "ABCDEF");
-    private static readonly CharSet _digits = new(2, "012345");
+    private static readonly CharacterRequirement _lowerCase = new(2, "abcdef");
+    private static readonly CharacterRequirement _upperCase = new(2, "ABCDEF");
+    private static readonly CharacterRequirement _digits = new(2, "012345");
 
     private static PasswordSettings CreateSettings() =>
         new([_lowerCase, _upperCase, _digits]);
@@ -44,9 +44,9 @@ public class PasswordGeneratorTests
         string password = generator.Generate(10);
 
         // Ensure at least 2 of each set
-        Assert.True(password.Count(_lowerCase.Chars.Contains) >= _lowerCase.Count);
-        Assert.True(password.Count(_upperCase.Chars.Contains) >= _upperCase.Count);
-        Assert.True(password.Count(_digits.Chars.Contains) >= _digits.Count);
+        Assert.True(password.Count(_lowerCase.CharacterPool.Contains) >= _lowerCase.MinRequired);
+        Assert.True(password.Count(_upperCase.CharacterPool.Contains) >= _upperCase.MinRequired);
+        Assert.True(password.Count(_digits.CharacterPool.Contains) >= _digits.MinRequired);
     }
 
     [Fact]
