@@ -1,4 +1,4 @@
-# KPasswordGenerator
+# PasswordGenerator
 
 A lightweight, secure, and flexible password generator library for .NET, built with cryptographic randomness and fully customizable character sets.
 
