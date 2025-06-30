@@ -20,13 +20,13 @@ A lightweight, secure, and flexible password generator library for .NET, built w
 
 ---
 
-```c#
+```csharp
 using KPasswordGenerator;
 
 // Define your password policy
 PasswordSettings settings = new(
 [
-    new CharacterRequirement(minRequired: 2, characterPool: "ABCDEFGHJKLMNPQRSTUVWXYZ"),    // At least 2 uppercase letters (no I, O)
+    new CharacterRequirement(minRequired: 2, characterPool: "ABCDEFGHJKLMNPQRSTUVWXYZ"),
     new CharacterRequirement(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
     new CharacterRequirement(4, "23456789"),                    // At least 4 digits (no 0, 1)
     new CharacterRequirement(2, "!@$?_-")                       // At least 2 symbols
