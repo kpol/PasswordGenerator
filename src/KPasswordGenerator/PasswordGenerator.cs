@@ -53,9 +53,17 @@ public sealed class PasswordGenerator
 
         foreach (var requirement in _passwordSettings.CharacterRequirements)
         {
-            int count = password.Count(requirement.CharacterPool.Contains);
+            int count = 0;
 
-            if (count < requirement.MinRequired) return false;
+            for (int i = 0; i < password.Length && count < requirement.MinRequired; i++)
+            {
+                if (requirement.CharacterPool.Contains(password[i]))
+                {
+                    count++;
+                }
+            }
+
+            if (count != requirement.MinRequired) return false;
         }
 
         return true;

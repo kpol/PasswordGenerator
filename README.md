@@ -39,6 +39,15 @@ string password = generator.Generate(16);
 Console.WriteLine(password);  // Example output: kAj79uV@E?m7_8eS
 ```
 
+### Using WithDefaults
+Quickly generate a password using default pools:
+```csharp
+PasswordSettings settings = PasswordSettings.WithDefaults(minLower: 2, minUpper: 2, minDigits: 2, minSpecial: 1);
+PasswordGenerator generator = new(settings);
+
+string password = generator.Generate(12);
+```
+
 ## Additional Methods
 
 ### `GenerateRandomLength(int minPasswordLength, int maxPasswordLength)`
