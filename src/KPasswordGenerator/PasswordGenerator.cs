@@ -34,4 +34,30 @@ public sealed class PasswordGenerator
 
         return buffer.ToString();
     }
+
+    public string GenerateRandomLength(int minPasswordLength, int maxPasswordLength)
+    {
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(minPasswordLength, maxPasswordLength);
+        ArgumentOutOfRangeException.ThrowIfLessThan(minPasswordLength, _passwordSettings.MinimumPasswordLength);
+
+        int length = RandomNumberGenerator.GetInt32(minPasswordLength, maxPasswordLength + 1);
+
+        return Generate(length);
+    }
+
+    public bool Validate(string password)
+    {
+        ArgumentNullException.ThrowIfNull(password);
+
+        if (password.Length < _passwordSettings.MinimumPasswordLength) return false;
+
+        foreach (var requirement in _passwordSettings.CharacterRequirements)
+        {
+            int count = password.Count(requirement.CharacterPool.Contains);
+
+            if (count < requirement.MinRequired) return false;
+        }
+
+        return true;
+    }
 }

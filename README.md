@@ -39,6 +39,35 @@ string password = generator.Generate(16);
 Console.WriteLine(password);  // Example output: kAj79uV@E?m7_8eS
 ```
 
+## Additional Methods
+
+### `GenerateRandomLength(int minPasswordLength, int maxPasswordLength)`
+
+Generates a password of **random length within a specified range**.
+
+- Ensures the generated password meets all defined character requirements.
+- Uses secure randomness to choose the length.
+
+**Example:**
+```csharp
+string password = generator.GenerateRandomLength(12, 20);
+```
+
+---
+
+### `Validate(string password)`
+
+Validates whether a password meets the current `PasswordSettings` policy.
+
+- Checks overall length.
+- Verifies that the required number of characters from each character pool are present.
+- Returns `true` if all rules pass, otherwise `false`.
+
+- **Example:**
+```csharp
+bool isValid = generator.Validate("abcD123!");
+```
+
 ## Installation
 
 Install via NuGet:
