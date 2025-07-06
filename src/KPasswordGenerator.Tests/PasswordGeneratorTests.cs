@@ -130,17 +130,16 @@ public class PasswordGeneratorTests
     {
         var generator = CreateDefaultGenerator();
 
-        Assert.Throws<ArgumentNullException>(() =>
-            generator.Validate(null!));
+        Assert.Throws<ArgumentNullException>(() => generator.Validate(null!));
     }
 
     private static PasswordGenerator CreateDefaultGenerator()
     {
-        List<CharacterRequirement> requirements = 
+        List<CharacterRequirement> requirements =
         [
-            new CharacterRequirement(2, "abc"),
-            new CharacterRequirement(1, "123"),
-            new CharacterRequirement(1, "!@#")
+            new(2, "abc"),
+            new(1, "123"),
+            new(1, "!@#")
         ];
 
         return new PasswordGenerator(new PasswordSettings(requirements));

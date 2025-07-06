@@ -26,15 +26,15 @@ using KPasswordGenerator;
 // Define your password policy
 PasswordSettings settings = new(
 [
-    new CharacterRequirement(minRequired: 2, characterPool: "ABCDEFGHJKLMNPQRSTUVWXYZ"),
-    new CharacterRequirement(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
-    new CharacterRequirement(4, "23456789"),                    // At least 4 digits (no 0, 1)
-    new CharacterRequirement(2, "!@$?_-")                       // At least 2 symbols
+    new(minRequired: 2, characterPool: "ABCDEFGHJKLMNPQRSTUVWXYZ"),
+    new(3, "abcdefghijkmnopqrstuvwxyz"),   // At least 3 lowercase letters (no l)
+    new(4, "23456789"),                    // At least 4 digits (no 0, 1)
+    new(2, "!@$?_-")                       // At least 2 symbols
 ]);
 
 PasswordGenerator generator = new(settings);
 
-string password = generator.Generate(16);
+string password = generator.Generate(passwordLength: 16);
 
 Console.WriteLine(password);  // Example output: kAj79uV@E?m7_8eS
 ```
